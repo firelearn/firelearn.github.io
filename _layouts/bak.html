@@ -1,0 +1,81 @@
+<script src="https://apis.google.com/js/api:client.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<script>
+    var gUser;
+    function onSuccess(googleUser) {
+        gUser=googleUser;
+        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+        console.log(error);
+    }
+    function renderButton(googleUser) 
+    {
+        // if(googleUser){
+        //     document.getElementById('signInButton').innerText = googleUser.getBasicProfile().getName();
+        // }else{
+        //     attachSignin(document.getElementById('signInButton'));
+        // }
+        gapi.signin2.render('signInButton', 
+        {
+            'scope': 'profile email',
+            // 'width': 240,
+            // 'height': 50,
+            'longtitle': false,
+            'theme': 'light',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+
+    function attachSignin(element) {
+        console.log("SIGNIN: " + element.id);
+        gapi.load('auth2', function(){
+            auth2 = gapi.auth2.init({
+                client_id: '1029780837049-00a0kk6usg29br5ibv67bgoh9rs9mg42.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+            });
+            auth2.attachClickHandler(element, {},
+                function(uu) {
+                    googleUser = uu;
+                    element.innerText = googleUser.getBasicProfile().getName();
+                }, function(error) {
+                    alert(JSON.stringify(error, undefined, 2));
+                }
+            );
+            
+        });
+    }
+
+</script>
+<!-- 
+<script src="https://apis.google.com/js/api:client.js"></script>
+<script>
+    var googleUser = {};
+    var startApp = function() {
+        gapi.load('auth2', function(){
+            auth2 = gapi.auth2.init({
+                client_id: '1029780837049-00a0kk6usg29br5ibv67bgoh9rs9mg42.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+            });
+            if (auth2.isSignedIn.get()) {
+                googleUser = auth2.currentUser.get().getBasicProfile();
+                document.getElementById('signInButton').innerText = googleUser.getName();
+            }else{
+                attachSignin(document.getElementById('signInButton'));
+            }
+        });
+    };
+
+    function attachSignin(element) {
+        console.log("SIGNIN: " + element.id);
+        auth2.attachClickHandler(element, {},
+            function(uu) {
+                googleUser = uu;
+                element.innerText = "Signed in: " + googleUser.getBasicProfile().getName();
+            }, function(error) {
+                alert(JSON.stringify(error, undefined, 2));
+            });
+    }
+    startApp();
+</script> -->
