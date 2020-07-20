@@ -1,23 +1,11 @@
-title: Free Learn
+title: Fire Learn
 description: Learning site for FIRE!
 exclude: [README.md]
 include: [".well-known"]
 
 # applies pretty for all
 permalink: pretty
-
-defaults:
-    - scope:
-        path: ""
-        type: lessons
-      values:
-        permalink: lesson/:categories/:title
-
 plugins:
   - jekyll-relative-links
-
-collections:
-  lessons:
-    output : true
 
 learntrack: http://localhost:7071/api/
