@@ -8,5 +8,5 @@ permalink: pretty
 plugins:
   - jekyll-relative-links
 
-repository: firelearn/learn-theme
-remote_theme: firelearn/learn-theme
+repository: firelearn/learn-theme@v0.1.2
+remote_theme: firelearn/learn-theme@v0.1.2
